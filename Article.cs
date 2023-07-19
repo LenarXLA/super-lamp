@@ -11,7 +11,8 @@ public class Article
   public string? Author { get; set; }
 
   public string? Content { get; set; }
+  
+  public DateTime? Date { get; set; }
 
-  [NotMapped]
-  public DateOnly Date { get; set; }
+  public string? Category { get; set; }
 }
