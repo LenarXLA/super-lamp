@@ -1,21 +1,22 @@
+using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore;
+using Project.WebApi.Entities.Models;
+
 namespace Project.WebApi.Helpers;
 
-using Microsoft.EntityFrameworkCore;
-using Project.WebApi;
-
-public class DataContext : DbContext
+public class DataContext : IdentityDbContext<User>
 {
-    protected readonly IConfiguration Configuration;
-
-    public DataContext(IConfiguration configuration)
+    public DataContext(DbContextOptions options)
+    : base(options)
     {
-        Configuration = configuration;
     }
 
-    protected override void OnConfiguring(DbContextOptionsBuilder options)
+    protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
-        options.UseNpgsql(Configuration.GetConnectionString("WebApiDatabase"));
+        base.OnModelCreating(modelBuilder);
+        modelBuilder.ApplyConfiguration(new RoleConfiguration());
     }
 
     public DbSet<Article> Articles { get; set; }
+
 }

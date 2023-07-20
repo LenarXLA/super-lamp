@@ -1,6 +1,4 @@
-using System.ComponentModel.DataAnnotations.Schema;
-
-namespace Project.WebApi;
+namespace Project.WebApi.Entities.Models;
 
 public class Article
 {

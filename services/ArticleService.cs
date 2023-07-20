@@ -1,4 +1,5 @@
 using Microsoft.EntityFrameworkCore;
+using Project.WebApi.Entities.Models;
 using Project.WebApi.Helpers;
 
 namespace Project.WebApi.Services;

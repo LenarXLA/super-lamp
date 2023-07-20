@@ -1,5 +1,6 @@
 using System.Text.Encodings.Web;
 using System.Text.Json;
+using Project.WebApi.Entities.Models;
 
 namespace Project.WebApi;
 
