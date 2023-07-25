@@ -18,8 +18,7 @@ builder.Services.AddSwaggerGen();
 builder.Services.AddCors();
 
 builder.Services.AddDbContext<DataContext>();
-builder.Services.AddScoped<ArticleService>();
-builder.Services.AddScoped<JwtHandler>();
+
 
 builder.Services.AddIdentity<User, IdentityRole>()
         .AddEntityFrameworkStores<DataContext>()
@@ -47,6 +46,10 @@ builder.Services.AddAuthentication(opt =>
             .GetBytes(jwtSettings.GetSection("securityKey").Value))
     };
 });
+
+
+builder.Services.AddScoped<ArticleService>();
+builder.Services.AddScoped<JwtHandler>();
 
 var app = builder.Build();
 AppContext.SetSwitch("Npgsql.EnableLegacyTimestampBehavior", true);

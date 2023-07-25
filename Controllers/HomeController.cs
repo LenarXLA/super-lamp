@@ -1,3 +1,5 @@
+using Microsoft.AspNetCore.Authentication.JwtBearer;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Project.WebApi.Entities.Models;
 using Project.WebApi.Services;
@@ -6,6 +8,7 @@ namespace Project.WebApi.Controllers;
 
 [ApiController]
 [Route("api/[controller]/[action]")]
+// [Authorize]
 public class HomeController : ControllerBase 
 {
 	private ArticleService _articleService;
@@ -35,6 +38,7 @@ public class HomeController : ControllerBase
 
 
 	[HttpPost(Name = "AddArticle")]
+	[Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme, Roles = "Administrator")]
 	public async Task<ActionResult> AddArticle(Article art) 
 	{
 		await _articleService.Create(art);
@@ -43,6 +47,7 @@ public class HomeController : ControllerBase
 
 
 	[HttpPut("{idArticle:int}", Name = "UpdateArticle")]
+	[Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme, Roles = "Administrator")]
 	public async Task<ActionResult> UpdateArticle(int idArticle, Article art) 
 	{
         if (idArticle != art.Id) 
@@ -54,6 +59,7 @@ public class HomeController : ControllerBase
 	}
 
 	[HttpDelete("{idArticle:int}", Name = "DeleteArticle")]
+	[Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme, Roles = "Administrator")]
 	public async Task<ActionResult> DeleteArticle(int idArticle)
 	{
         await _articleService.Delete(idArticle);
